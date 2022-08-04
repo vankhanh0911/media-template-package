@@ -10,6 +10,9 @@ Its supports template:
 - SLIDE_IN
 - GAMIFIED
 
+![image info](./images/media-template.png)
+[Media Template](https://media-template.antsomi.com/)
+
 ## Intstall
 ```sh
 flutter pub add mediatemplate
