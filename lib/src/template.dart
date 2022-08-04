@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import './ads.dart';
 import './adsinfo.dart';
 
 class Template extends StatefulWidget {
@@ -18,6 +17,7 @@ class Template extends StatefulWidget {
 
 class _MediaTemplateState extends State<Template> {
   double heightContainer = 0;
+  double widthContainer = 0;
   String templateType = '';
   Future<bool>? loaded;
   Widget? child;
@@ -36,13 +36,18 @@ class _MediaTemplateState extends State<Template> {
     var data = message.data;
 
     switch (type) {
-      case 'antsomi-cdp-campaign-height':
+      case 'antsomi-cdp-campaign-size':
         setState(() {
           heightContainer = data['height'].toDouble();
+          widthContainer = data['width'].toDouble();
         });
         break;
       case 'antsomi-cdp-webview-closed':
-        Navigator.of(context, rootNavigator: true).pop(true);
+        if (['pop_up', 'full_screen', 'floating_bar', 'gamified']
+            .contains(widget.ad.template)) {
+          Navigator.of(context, rootNavigator: true).pop(true);
+        }
+
         setState(() {
           show = false;
         });
@@ -52,12 +57,14 @@ class _MediaTemplateState extends State<Template> {
 
   @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.width);
-    print(heightContainer);
     return widget.ad.jsCode != '' && show
-        ? Container(
+        ? SizedBox(
             height: heightContainer,
-            width: MediaQuery.of(context).size.width,
+            width: widget.ad.template == 'slide_in'
+                ? widthContainer == 0
+                    ? MediaQuery.of(context).size.width
+                    : widthContainer
+                : MediaQuery.of(context).size.width,
             child: MediaTemplateWebview(
                 key: widget.key,
                 zoneId: widget.ad.zoneCode,
@@ -127,7 +134,7 @@ class _MediaTemplateWebviewState extends State<MediaTemplateWebview> {
       key: key,
       zoomEnabled: false,
       initialUrl: Uri.encodeFull(
-          'https://sandbox-template.ants.vn/khanhhv/mobile/index.html?v=12'),
+          'https://sandbox-template.ants.vn/khanhhv/mobile/index.html?v=14'),
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (WebViewController webViewController) {
         _controller = webViewController;

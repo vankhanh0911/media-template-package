@@ -10,6 +10,8 @@ class AdsLoadCallback {
 }
 
 class AdInfo {
+  static String zoneSelectorInit = '#at-mobile-app';
+
   final num portalId;
   final num propsId;
   final String zoneCode;
@@ -37,6 +39,11 @@ class AdInfo {
 
   factory AdInfo.fromJson(num portalId, num propsId, String zoneCode,
       String? userId, String? items, Map<String, dynamic> json) {
+    var jsCode = json['javascript'] as String;
+    if (zoneCode == 'inline' && json['cssSelector'] != '') {
+      jsCode = jsCode.replaceAll(json['cssSelector'], zoneSelectorInit);
+    }
+
     return AdInfo(
         portalId: portalId,
         propsId: propsId,
@@ -44,7 +51,7 @@ class AdInfo {
         userId: userId,
         items: items,
         template: json['template'] as String,
-        jsCode: json['javascript'] as String,
+        jsCode: jsCode,
         cssSelector: json['cssSelector'] as String?,
         destinationFrequencyCapping: json['zoneFrequencyCapping'],
         zoneFrequencyCapping: json['zoneFrequencyCapping'],

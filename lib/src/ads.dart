@@ -41,8 +41,6 @@ class Ads {
             }
         });
 
-    print(ads.first.jsCode);
-
     if (ads.isEmpty) {
       onAdFailedToLoad('Empty ads');
     } else {
@@ -53,10 +51,17 @@ class Ads {
   static void show(AdInfo ad, context, scaffoldKey) {
     String templateType = ad.template;
 
-    print(templateType);
-
     switch (templateType.toUpperCase()) {
-      case 'POPUP':
+      case 'POP_UP':
+        showDialog(
+          context: context,
+          useSafeArea: false,
+          builder: (BuildContext context) {
+            return Dialog(
+                insetPadding: EdgeInsets.zero, child: Template(ad: ad));
+          },
+        );
+        break;
       case 'FULLSCREEN':
       case 'GAMIFIED': //gamified
         showGeneralDialog(
@@ -69,11 +74,10 @@ class Ads {
         );
         break;
       case 'FLOATING_BAR':
+      case 'SLIDE_IN':
         scaffoldKey.currentState.showBottomSheet((context) => Template(ad: ad));
         break;
       case 'INLINE':
-        break;
-      case 'WEBVIEW':
         break;
     }
   }

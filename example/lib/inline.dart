@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:mediatemplate/mediatemplate.dart';
 import 'package:flutter/scheduler.dart';
 
-class FullScreen extends StatefulWidget {
-  const FullScreen({Key? key}) : super(key: key);
+class Inline extends StatefulWidget {
+  const Inline({Key? key}) : super(key: key);
 
   @override
-  State<FullScreen> createState() => _FullScreenState();
+  State<Inline> createState() => _InlineState();
 }
 
-class _FullScreenState extends State<FullScreen> {
+class _InlineState extends State<Inline> {
   late AdInfo _ad;
   bool loaded = false;
 
@@ -18,7 +18,7 @@ class _FullScreenState extends State<FullScreen> {
     Ads.load(
         portalId: 33167,
         propsId: 556301499,
-        zoneCode: 'gamified',
+        zoneCode: 'inline',
         onAdFailedToLoad: (String error) {
           print(error);
         },
@@ -34,25 +34,28 @@ class _FullScreenState extends State<FullScreen> {
   Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
 
-    if (loaded) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Ads.show(_ad, context, scaffoldKey);
-      });
-    }
+    // if (loaded) {
+    //   WidgetsBinding.instance.addPostFrameCallback((_) {
+    //     Ads.show(_ad, context, scaffoldKey);
+    //   });
+    // }
 
     return Scaffold(
-        key: scaffoldKey,
-        appBar: AppBar(
-          title: const Text('FullScreen'),
-        ),
-        body: Center(
-          child: ElevatedButton(
+      key: scaffoldKey,
+      appBar: AppBar(
+        title: const Text('Inline'),
+      ),
+      body: Center(
+        child: loaded ? Template(ad: _ad) : null,
+        ElevatedButton(
             child: const Text('Home'),
             onPressed: () {
               // Navigate to home route when tapped.
               Navigator.pop(context);
             },
-          ),
-        ));
+          )
+      ),
+      // floatingActionButton: loaded ? Template(ad: _ad) : null,
+    );
   }
 }

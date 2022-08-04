@@ -1,6 +1,8 @@
 name: mediatemplate
-description: A new Flutter package project.
+description: Package show media template Flutter
 version: 0.0.1
+homepage: https://github.com/vankhanh0911/media-template-package
+repository: https://github.com/vankhanh0911/media-template-package
 
 environment:
   sdk: ">=2.16.1 <3.0.0"
@@ -9,12 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: 0.13.3
+  http: ^0.13.5
   webview_flutter: ^2.7.0
-  flutter_webview_plugin:
-    git:
-      url: https://github.com/Bhagat8533/flutter_webview_plugin # Repo
-      ref: master  # Branch name
 
 dev_dependencies:
   flutter_test:

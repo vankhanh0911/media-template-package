@@ -50,7 +50,7 @@ class _FloatingBarState extends State<FloatingBar> {
             child: const Text('Home'),
             onPressed: () {
               // Navigate to home route when tapped.
-              // Navigator.pop(context);
+              Navigator.pop(context);
             },
           ),
         ));

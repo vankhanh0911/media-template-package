@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:mediatemplate/mediatemplate.dart';
 import 'package:flutter/scheduler.dart';
 
-class FullScreen extends StatefulWidget {
-  const FullScreen({Key? key}) : super(key: key);
+class SlideIn extends StatefulWidget {
+  const SlideIn({Key? key}) : super(key: key);
 
   @override
-  State<FullScreen> createState() => _FullScreenState();
+  State<SlideIn> createState() => _SlideInState();
 }
 
-class _FullScreenState extends State<FullScreen> {
+class _SlideInState extends State<SlideIn> {
   late AdInfo _ad;
   bool loaded = false;
 
@@ -18,7 +18,7 @@ class _FullScreenState extends State<FullScreen> {
     Ads.load(
         portalId: 33167,
         propsId: 556301499,
-        zoneCode: 'gamified',
+        zoneCode: 'slide_in',
         onAdFailedToLoad: (String error) {
           print(error);
         },
@@ -41,18 +41,20 @@ class _FullScreenState extends State<FullScreen> {
     }
 
     return Scaffold(
-        key: scaffoldKey,
-        appBar: AppBar(
-          title: const Text('FullScreen'),
+      key: scaffoldKey,
+      appBar: AppBar(
+        title: const Text('Slide In'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          child: const Text('Home'),
+          onPressed: () {
+            // Navigate to home route when tapped.
+            Navigator.pop(context);
+          },
         ),
-        body: Center(
-          child: ElevatedButton(
-            child: const Text('Home'),
-            onPressed: () {
-              // Navigate to home route when tapped.
-              Navigator.pop(context);
-            },
-          ),
-        ));
+      ),
+      // floatingActionButton: loaded ? Template(ad: _ad) : null,
+    );
   }
 }

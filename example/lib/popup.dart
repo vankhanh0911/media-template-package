@@ -18,7 +18,7 @@ class _PopupState extends State<Popup> {
     Ads.load(
         portalId: 33167,
         propsId: 556301499,
-        zoneCode: 'popup',
+        zoneCode: 'pop_up',
         onAdFailedToLoad: (String error) {
           print(error);
         },

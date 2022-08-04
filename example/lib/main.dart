@@ -6,6 +6,8 @@ import 'package:flutter/scheduler.dart';
 import './floatingbar.dart';
 import './fullscreen.dart';
 import './popup.dart';
+import './slidein.dart';
+import './inline.dart';
 
 void main() {
   runApp(const MyApp());
@@ -92,18 +94,18 @@ class _MyHomePageState extends State<MyHomePage> {
     //     },
     //   );
 
-    //   // showBottomSheet(
-    //   //   context: context,
-    //   //   builder: (BuildContext context) {
-    //   //     return MediaTemplate(
-    //   //         key: UniqueKey(),
-    //   //         portalId: 33167,
-    //   //         propsId: 556301457,
-    //   //         zoneId: 1563035,
-    //   //         userId: '1563035',
-    //   //         items: '');
-    //   //   },
-    //   // );
+    // showBottomSheet(
+    //   context: context,
+    //   builder: (BuildContext context) {
+    //     return MediaTemplate(
+    //         key: UniqueKey(),
+    //         portalId: 33167,
+    //         propsId: 556301457,
+    //         zoneId: 1563035,
+    //         userId: '1563035',
+    //         items: '');
+    //   },
+    // );
     // });
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
@@ -181,6 +183,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const Popup()),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Slide in'),
+              onPressed: () {
+                // Navigate to second route when tapped.
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SlideIn()),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Inline'),
+              onPressed: () {
+                // Navigate to second route when tapped.
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Inline()),
                 );
               },
             )
