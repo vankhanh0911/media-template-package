@@ -7,8 +7,8 @@ import 'adsinfo.dart';
 import 'template.dart';
 
 class Ads {
-  static String ec = 'load';
-  static String ea = 'webview_screen';
+  static String ec = 'webview_screen';
+  static String ea = 'load';
 
   static Future<void> load({
     required num portalId,
@@ -22,7 +22,7 @@ class Ads {
     var ec = Ads.ec;
     var ea = Ads.ea;
     var url =
-        'https://sandbox-delivery.cdp.asia/interaction/v2?portal_id=$portalId&ec=$ec&ea=$ea&prop_id=$propsId&zoneId=[$zoneCode]&uid=$userId&items=$items&format=json';
+        'https://delivery.cdp.asia/interaction/v2?portal_id=$portalId&ec=$ec&ea=$ea&prop_id=$propsId&zoneCode=[$zoneCode]&uid=$userId&items=$items&format=json';
 
     var uri = Uri.parse(url);
 
@@ -48,22 +48,24 @@ class Ads {
     }
   }
 
-  static void show(AdInfo ad, context, scaffoldKey) {
+  static void show(AdInfo ad, context, scaffoldKey,
+      [AdCallbackChangRoute<String>? callbackRoute]) {
     String templateType = ad.template;
 
-    switch (templateType.toUpperCase()) {
-      case 'POP_UP':
+    switch (templateType) {
+      case 'pop_up':
         showDialog(
           context: context,
           useSafeArea: false,
           builder: (BuildContext context) {
             return Dialog(
-                insetPadding: EdgeInsets.zero, child: Template(ad: ad));
+                insetPadding: EdgeInsets.zero,
+                child: Template(ad: ad, onRouteChange: callbackRoute));
           },
         );
         break;
-      case 'FULLSCREEN':
-      case 'GAMIFIED': //gamified
+      case 'full_screen':
+      case 'gamified': //gamified
         showGeneralDialog(
           context: context,
           barrierDismissible: false,
@@ -73,11 +75,11 @@ class Ads {
           },
         );
         break;
-      case 'FLOATING_BAR':
-      case 'SLIDE_IN':
+      case 'floating_bar':
+      case 'slide_in':
         scaffoldKey.currentState.showBottomSheet((context) => Template(ad: ad));
         break;
-      case 'INLINE':
+      case 'inline':
         break;
     }
   }

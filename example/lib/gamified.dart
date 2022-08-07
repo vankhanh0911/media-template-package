@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:mediatemplate/mediatemplate.dart';
 import 'package:flutter/scheduler.dart';
 
-class FloatingBar extends StatefulWidget {
-  const FloatingBar({Key? key}) : super(key: key);
+class Gamified extends StatefulWidget {
+  const Gamified({Key? key}) : super(key: key);
 
   @override
-  State<FloatingBar> createState() => _FloatingBarState();
+  State<Gamified> createState() => _GamifiedState();
 }
 
-class _FloatingBarState extends State<FloatingBar> {
+class _GamifiedState extends State<Gamified> {
   late AdInfo _ad;
   bool loaded = false;
 
@@ -18,8 +18,8 @@ class _FloatingBarState extends State<FloatingBar> {
     Ads.load(
         portalId: 561236459,
         propsId: 564990801,
-        zoneCode: 'floating_bar',
         userId: '123-23992-23991-2132',
+        zoneCode: 'gamified',
         onAdFailedToLoad: (String error) {
           print(error);
         },
@@ -44,7 +44,7 @@ class _FloatingBarState extends State<FloatingBar> {
     return Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
-          title: const Text('FloatingBar'),
+          title: const Text('Gamified'),
         ),
         body: Center(
           child: ElevatedButton(

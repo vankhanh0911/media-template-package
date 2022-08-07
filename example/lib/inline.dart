@@ -16,9 +16,10 @@ class _InlineState extends State<Inline> {
 
   void initState() {
     Ads.load(
-        portalId: 33167,
-        propsId: 556301499,
+        portalId: 561236459,
+        propsId: 564990801,
         zoneCode: 'inline',
+        userId: '123-23992-23991-2132',
         onAdFailedToLoad: (String error) {
           print(error);
         },
@@ -47,13 +48,6 @@ class _InlineState extends State<Inline> {
       ),
       body: Center(
         child: loaded ? Template(ad: _ad) : null,
-        ElevatedButton(
-            child: const Text('Home'),
-            onPressed: () {
-              // Navigate to home route when tapped.
-              Navigator.pop(context);
-            },
-          )
       ),
       // floatingActionButton: loaded ? Template(ad: _ad) : null,
     );

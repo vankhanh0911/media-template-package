@@ -8,6 +8,7 @@ import './fullscreen.dart';
 import './popup.dart';
 import './slidein.dart';
 import './inline.dart';
+import './gamified.dart';
 
 void main() {
   runApp(const MyApp());
@@ -203,6 +204,16 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const Inline()),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Gamimifed'),
+              onPressed: () {
+                // Navigate to second route when tapped.
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Gamified()),
                 );
               },
             )

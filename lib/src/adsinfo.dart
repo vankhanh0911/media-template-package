@@ -1,5 +1,6 @@
 typedef AdCallbackLoaded<Ad> = void Function(Ad ad);
 typedef AdCallbackFailed<String> = void Function(String);
+typedef AdCallbackChangRoute<String> = void Function(String route);
 
 class AdsLoadCallback {
   /// Construct a [InterstitialAdLoadCallback].
@@ -22,7 +23,6 @@ class AdInfo {
   final String? cssSelector;
   final dynamic? destinationFrequencyCapping;
   final dynamic? zoneFrequencyCapping;
-  final bool loaded;
 
   const AdInfo(
       {required this.portalId,
@@ -34,8 +34,7 @@ class AdInfo {
       required this.jsCode,
       this.cssSelector,
       this.destinationFrequencyCapping,
-      this.zoneFrequencyCapping,
-      this.loaded = false});
+      this.zoneFrequencyCapping});
 
   factory AdInfo.fromJson(num portalId, num propsId, String zoneCode,
       String? userId, String? items, Map<String, dynamic> json) {
@@ -54,7 +53,6 @@ class AdInfo {
         jsCode: jsCode,
         cssSelector: json['cssSelector'] as String?,
         destinationFrequencyCapping: json['zoneFrequencyCapping'],
-        zoneFrequencyCapping: json['zoneFrequencyCapping'],
-        loaded: true);
+        zoneFrequencyCapping: json['zoneFrequencyCapping']);
   }
 }

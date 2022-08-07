@@ -16,9 +16,10 @@ class _FullScreenState extends State<FullScreen> {
 
   void initState() {
     Ads.load(
-        portalId: 33167,
-        propsId: 556301499,
-        zoneCode: 'gamified',
+        portalId: 561236459,
+        propsId: 564990801,
+        userId: '123-23992-23991-2132',
+        zoneCode: 'full_screen',
         onAdFailedToLoad: (String error) {
           print(error);
         },

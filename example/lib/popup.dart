@@ -16,9 +16,10 @@ class _PopupState extends State<Popup> {
 
   void initState() {
     Ads.load(
-        portalId: 33167,
-        propsId: 556301499,
+        portalId: 561236459,
+        propsId: 564990801,
         zoneCode: 'pop_up',
+        userId: '123-23992-23991-2132',
         onAdFailedToLoad: (String error) {
           print(error);
         },
@@ -30,13 +31,18 @@ class _PopupState extends State<Popup> {
         });
   }
 
+  void callbackRoute(String route) {
+    print(route);
+    // do something with route
+  }
+
   @override
   Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
 
     if (loaded) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        Ads.show(_ad, context, scaffoldKey);
+        Ads.show(_ad, context, scaffoldKey, callbackRoute);
       });
     }
 

@@ -3,13 +3,16 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import './adsinfo.dart';
 
 class Template extends StatefulWidget {
-  const Template({Key? key, required this.ad}) : super(key: key);
+  const Template({Key? key, required this.ad, this.onRouteChange})
+      : super(key: key);
 
   final AdInfo ad;
+  final AdCallbackChangRoute<String>? onRouteChange;
 
   @override
   _MediaTemplateState createState() => _MediaTemplateState();
@@ -17,7 +20,6 @@ class Template extends StatefulWidget {
 
 class _MediaTemplateState extends State<Template> {
   double heightContainer = 0;
-  double widthContainer = 0;
   String templateType = '';
   Future<bool>? loaded;
   Widget? child;
@@ -31,7 +33,7 @@ class _MediaTemplateState extends State<Template> {
     super.initState();
   }
 
-  void handleMessageFromWebView(MessageWebview message) {
+  Future<void> handleMessageFromWebView(MessageWebview message) async {
     var type = message.type;
     var data = message.data;
 
@@ -39,7 +41,6 @@ class _MediaTemplateState extends State<Template> {
       case 'antsomi-cdp-campaign-size':
         setState(() {
           heightContainer = data['height'].toDouble();
-          widthContainer = data['width'].toDouble();
         });
         break;
       case 'antsomi-cdp-webview-closed':
@@ -52,6 +53,15 @@ class _MediaTemplateState extends State<Template> {
           show = false;
         });
         break;
+      case 'antsomi-cdp-campaign-change-route':
+        var route = data['route'];
+
+        if (widget.onRouteChange != null) {
+          widget.onRouteChange!(route);
+        } else {
+          await launchUrl(Uri.parse(route));
+        }
+        break;
     }
   }
 
@@ -60,15 +70,12 @@ class _MediaTemplateState extends State<Template> {
     return widget.ad.jsCode != '' && show
         ? SizedBox(
             height: heightContainer,
-            width: widget.ad.template == 'slide_in'
-                ? widthContainer == 0
-                    ? MediaQuery.of(context).size.width
-                    : widthContainer
-                : MediaQuery.of(context).size.width,
+            width: MediaQuery.of(context).size.width,
             child: MediaTemplateWebview(
                 key: widget.key,
-                zoneId: widget.ad.zoneCode,
+                zoneCode: widget.ad.zoneCode,
                 js: widget.ad.jsCode,
+                ad: widget.ad,
                 callback: (MessageWebview message) {
                   handleMessageFromWebView(message);
                 }),
@@ -93,11 +100,16 @@ class MessageWebview {
 
 class MediaTemplateWebview extends StatefulWidget {
   final String js;
-  final String? zoneId;
+  final AdInfo? ad;
+  final String? zoneCode;
   final Function(MessageWebview) callback;
 
   const MediaTemplateWebview(
-      {Key? key, required this.js, required this.callback, this.zoneId})
+      {Key? key,
+      required this.js,
+      required this.callback,
+      this.ad,
+      this.zoneCode})
       : super(key: key);
 
   @override
@@ -130,11 +142,17 @@ class _MediaTemplateWebviewState extends State<MediaTemplateWebview> {
 
   @override
   Widget build(BuildContext context) {
+    var portalId = widget.ad?.portalId;
+    var propsId = widget.ad?.propsId;
+    var template = widget.ad?.template;
+    var userId = widget.ad?.userId;
+    var items = widget.ad?.items;
+
     return WebView(
       key: key,
       zoomEnabled: false,
       initialUrl: Uri.encodeFull(
-          'https://sandbox-template.ants.vn/khanhhv/mobile/index.html?v=14'),
+          'https://st-media-template.antsomi.com/html/index.html?portalId=${portalId}&propsId=${propsId}&zoneCode=${template}&userId=${userId}&items=${items}&v=1'),
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (WebViewController webViewController) {
         _controller = webViewController;
