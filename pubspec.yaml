@@ -1,5 +1,5 @@
 name: mediatemplate
-description: Package show media template Flutter
+description: Package used to show media template on Flutter app. Support all template for media template. Provide function show and Container that developer can use to show anywhere in app.
 version: 0.0.1
 homepage: https://github.com/vankhanh0911/media-template-package
 repository: https://github.com/vankhanh0911/media-template-package
@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   http: ^0.13.5
   url_launcher: ^6.1.5
-  webview_flutter: ^2.7.0
+  webview_flutter: ^3.0.4
 
 dev_dependencies:
   flutter_test:

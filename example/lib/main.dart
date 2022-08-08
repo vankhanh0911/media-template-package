@@ -78,42 +78,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // SchedulerBinding.instance!.addPostFrameCallback((timeStamp) {
-    //   showDialog(
-    //     context: context,
-    //     useSafeArea: false,
-    //     builder: (BuildContext context) {
-    //       return Dialog(
-    //           insetPadding: EdgeInsets.zero,
-    //           child: MediaTemplate(
-    //               key: UniqueKey(),
-    //               portalId: 33167,
-    //               propsId: 556301499,
-    //               zoneId: 531009,
-    //               userId: '1563035',
-    //               items: ''));
-    //     },
-    //   );
-
-    // showBottomSheet(
-    //   context: context,
-    //   builder: (BuildContext context) {
-    //     return MediaTemplate(
-    //         key: UniqueKey(),
-    //         portalId: 33167,
-    //         propsId: 556301457,
-    //         zoneId: 1563035,
-    //         userId: '1563035',
-    //         items: '');
-    //   },
-    // );
-    // });
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
