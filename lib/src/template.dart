@@ -19,7 +19,7 @@ class Template extends StatefulWidget {
 }
 
 class _MediaTemplateState extends State<Template> {
-  double heightContainer = 0;
+  double heightContainer = 1;
   String templateType = '';
   Future<bool>? loaded;
   Widget? child;
@@ -151,10 +151,10 @@ class _MediaTemplateWebviewState extends State<MediaTemplateWebview> {
     return WebView(
       key: key,
       zoomEnabled: false,
-      initialUrl: Uri.encodeFull(
-          'https://st-media-template.antsomi.com/html/index.html?portalId=${portalId}&propsId=${propsId}&zoneCode=${template}&userId=${userId}&items=${items}&v=1'),
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (WebViewController webViewController) {
+        webViewController.loadUrl(Uri.encodeFull(
+            'https://st-media-template.antsomi.com/html/index.html?verion=221325&portalId=${portalId}&propsId=${propsId}&zoneCode=${template}&userId=${userId}&items=${items}&v=1'));
         _controller = webViewController;
       },
       onPageFinished: (String url) async {
