@@ -18,6 +18,9 @@ class _FullScreenState extends State<FullScreen> {
     Ads.load(
         portalId: 561236459,
         propsId: 564990801,
+        ec: 'product',
+        ea: 'view',
+        templateType: 'full_screen',
         userId: '123-23992-23991-2132',
         zoneCode: 'full_screen',
         onAdFailedToLoad: (String error) {

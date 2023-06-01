@@ -19,6 +19,9 @@ class _PopupState extends State<Popup> {
         portalId: 561236459,
         propsId: 564990801,
         zoneCode: 'pop_up',
+        ec: 'product',
+        ea: 'view',
+        templateType: 'popup',
         userId: '123-23992-23991-2132',
         onAdFailedToLoad: (String error) {
           print(error);

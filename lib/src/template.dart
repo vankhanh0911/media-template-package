@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import './adsinfo.dart';
+import './frequency.dart';
 
 class Template extends StatefulWidget {
   const Template({Key? key, required this.ad, this.onRouteChange})
@@ -55,6 +57,15 @@ class _MediaTemplateState extends State<Template> {
         break;
       case 'antsomi-cdp-campaign-change-route':
         var route = data['route'];
+
+        await Frequency.processIncreaseFreq(
+            widget.ad.storyId!,
+            widget.ad.destinationId!,
+            widget.ad.zoneId!,
+            "click",
+            widget.ad.frequencyCapping as Map<String, dynamic>,
+            widget.ad.destinationFrequencyCapping as Map<String, dynamic>,
+            widget.ad.zoneFrequencyCapping as Map<String, dynamic>);
 
         if (widget.onRouteChange != null) {
           widget.onRouteChange!(route);
@@ -147,6 +158,15 @@ class _MediaTemplateWebviewState extends State<MediaTemplateWebview> {
     var template = widget.ad?.template;
     var userId = widget.ad?.userId;
     var items = widget.ad?.items;
+    var storyId = widget.ad?.storyId;
+    var zoneId = widget.ad?.zoneId;
+    var destinationId = widget.ad?.destinationId;
+    Map<String, dynamic> frequencyCapping =
+        widget.ad?.frequencyCapping as Map<String, dynamic>;
+    Map<String, dynamic> destinationFrequencyCapping =
+        widget.ad?.destinationFrequencyCapping as Map<String, dynamic>;
+    Map<String, dynamic> zoneFrequencyCapping =
+        widget.ad?.zoneFrequencyCapping as Map<String, dynamic>;
 
     return WebView(
       key: key,
@@ -154,11 +174,20 @@ class _MediaTemplateWebviewState extends State<MediaTemplateWebview> {
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (WebViewController webViewController) {
         webViewController.loadUrl(Uri.encodeFull(
-            'https://st-media-template.antsomi.com/html/index.html?verion=221325&portalId=${portalId}&propsId=${propsId}&zoneCode=${template}&userId=${userId}&items=${items}&v=1'));
+            'https://st-media-template.antsomi.com/html/index.html?verion=221326&portalId=${portalId}&propsId=${propsId}&zoneCode=${template}&userId=${userId}&items=${items}&v=1'));
         _controller = webViewController;
       },
       onPageFinished: (String url) async {
         await _controller.runJavascript(widget.js);
+
+        await Frequency.processIncreaseFreq(
+            storyId!,
+            destinationId!,
+            zoneId!,
+            "impression",
+            frequencyCapping,
+            destinationFrequencyCapping,
+            zoneFrequencyCapping);
       },
       javascriptChannels: <JavascriptChannel>{
         JavascriptChannel(

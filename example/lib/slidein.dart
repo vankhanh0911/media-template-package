@@ -18,6 +18,9 @@ class _SlideInState extends State<SlideIn> {
     Ads.load(
         portalId: 561236459,
         propsId: 564990801,
+        ec: 'product',
+        ea: 'view',
+        templateType: 'slide_in',
         zoneCode: 'slide_in',
         userId: '123-23992-23991-2132',
         onAdFailedToLoad: (String error) {

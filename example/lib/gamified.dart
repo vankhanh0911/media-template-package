@@ -20,6 +20,9 @@ class _GamifiedState extends State<Gamified> {
         propsId: 564990801,
         userId: '123-23992-23991-2132',
         zoneCode: 'gamified',
+        ec: 'product',
+        ea: 'view',
+        templateType: 'gamified',
         onAdFailedToLoad: (String error) {
           print(error);
         },

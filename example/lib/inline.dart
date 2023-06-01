@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mediatemplate/mediatemplate.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/foundation.dart';
 
 class Inline extends StatefulWidget {
   const Inline({Key? key}) : super(key: key);
@@ -13,13 +14,28 @@ class Inline extends StatefulWidget {
 class _InlineState extends State<Inline> {
   late AdInfo _ad;
   bool loaded = false;
+  String deviceId = '';
 
+  @override
   void initState() {
+    super.initState();
+    setState(() {
+      deviceId = '123123123';
+    });
+  }
+
+  @override
+  void didUpdateWidget(covariant Inline oldWidget) {
+    print("change");
+
     Ads.load(
         portalId: 561236459,
         propsId: 564990801,
+        ec: '',
+        ea: '',
         zoneCode: 'inline',
-        userId: '123-23992-23991-2132',
+        templateType: 'inline',
+        userId: deviceId,
         onAdFailedToLoad: (String error) {
           print(error);
         },
@@ -29,6 +45,8 @@ class _InlineState extends State<Inline> {
             loaded = true;
           });
         });
+
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

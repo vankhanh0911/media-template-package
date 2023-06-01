@@ -117,7 +117,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 // Navigate to second route when tapped.
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const FloatingBar()),
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const FloatingBar(deviceId: '22312')),
                 );
               },
             ),
