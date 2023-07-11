@@ -45,7 +45,7 @@ class Ads {
             }
         });
 
-    if (!ads.isEmpty) {
+    if (ads.isNotEmpty) {
       for (final ad in ads) {
         bool flagStory = true;
         bool flagZone = true;
@@ -63,7 +63,6 @@ class Ads {
                 cachedFreq[ad.storyId.toString()] as Map<String, dynamic>;
 
             if (storyCached.containsKey(event) && value <= storyCached[event]) {
-              print('violate freq story');
               flagStory = false;
             }
           }
@@ -81,7 +80,6 @@ class Ads {
                 cachedFreq[ad.zoneId.toString()] as Map<String, dynamic>;
 
             if (zoneCached.containsKey(event) && value <= zoneCached[event]) {
-              print('violate freq zone');
               flagZone = false;
             }
           }
@@ -100,7 +98,6 @@ class Ads {
 
             if (destinationCached.containsKey(event) &&
                 value <= destinationCached[event]) {
-              print('violate freq destiantion');
               flagDestination = false;
             }
           }

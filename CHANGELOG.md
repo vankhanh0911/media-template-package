@@ -21,3 +21,12 @@
 ## 0.0.5
 
 * Update latest package version
+
+
+## 0.0.6
+
+* feat(Freq) apply frequency template, implement more flexible for event view template
+
+## 0.0.7
+
+* feat(Freq) cast freq when null

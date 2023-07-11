@@ -48,15 +48,17 @@ class _FloatingBarState extends State<FloatingBar> {
     Ads.load(
         portalId: 561236459,
         propsId: 564990801,
-        ec: 'product',
-        ea: 'view',
+        ec: 'webview_screen',
+        ea: 'load',
         templateType: 'floating_bar',
-        zoneCode: 'div_asm_inline',
+        zoneCode: '1127885',
         userId: deviceId,
         onAdFailedToLoad: (String error) {
           print(error);
+          print('11111111111');
         },
         onAdLoaded: (AdInfo ad) {
+          print('232323232323');
           setState(() {
             _ad = ad;
             loaded = true;

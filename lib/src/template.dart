@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import './adsinfo.dart';
 import './frequency.dart';
@@ -174,7 +173,7 @@ class _MediaTemplateWebviewState extends State<MediaTemplateWebview> {
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (WebViewController webViewController) {
         webViewController.loadUrl(Uri.encodeFull(
-            'https://st-media-template.antsomi.com/html/index.html?verion=221326&portalId=${portalId}&propsId=${propsId}&zoneCode=${template}&userId=${userId}&items=${items}&v=1'));
+            'https://st-media-template.antsomi.com/html/index.html?verion=221326&portalId=$portalId&propsId=$propsId&zoneCode=$template&userId=$userId&items=$items&v=1'));
         _controller = webViewController;
       },
       onPageFinished: (String url) async {

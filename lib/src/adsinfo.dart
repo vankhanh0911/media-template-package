@@ -76,10 +76,14 @@ class AdInfo {
         zoneId: json['zoneId'] as num,
         destinationId: json['destinationId'] as num,
         storyId: json['storyId'] as num,
-        destinationFrequencyCapping:
-            json['zoneFrequencyCapping'] as Map<String, dynamic>,
-        frequencyCapping: json['frequencyCapping'] as Map<String, dynamic>,
-        zoneFrequencyCapping:
-            json['zoneFrequencyCapping'] as Map<String, dynamic>);
+        destinationFrequencyCapping: json['zoneFrequencyCapping'] != null
+            ? json['zoneFrequencyCapping'] as Map<String, dynamic>
+            : {},
+        frequencyCapping: json['frequencyCapping'] != null
+            ? json['frequencyCapping'] as Map<String, dynamic>
+            : {},
+        zoneFrequencyCapping: json['zoneFrequencyCapping'] != null
+            ? json['zoneFrequencyCapping'] as Map<String, dynamic>
+            : {});
   }
 }
